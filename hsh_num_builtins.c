@@ -1,5 +1,12 @@
 #include "shell.h"
 
+/* Global structures/vairables - function related */
+static char *builtin_str[] = { 
+        "env",
+        "help",
+        "cd"
+};
+
 /**
  * hsh_parseline - Parse a line into tokens
  * @line: 

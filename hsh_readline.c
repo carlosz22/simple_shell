@@ -21,7 +21,9 @@ char *hsh_readline(void)
 
     characters_read = getline(&line, &size, stdin);
     if (characters_read == -1)
-        return (NULL);
-    
+    {
+	free(line);
+	return (NULL);
+    }
     return (line);
 }

@@ -19,6 +19,7 @@ extern char **environ;
 
 char *hsh_readline(void);
 char **hsh_parseline(char *line);
+int hsh_execute(char **args, char **env);
 int hsh_env(char **env);
 int hsh_help(char **args);
 int hsh_cd(char **args);
@@ -32,18 +33,8 @@ char *hsh_getenv(char *);
 int setenv(const char *, const char *, int);
 int unsetenv(const char *);
 
-/* Global structures/vairables - function related */
-static char *builtin_str[] = {
-	"env",
-	"help",
-	"cd"
-};
-
-static int (*builtin_func[]) (char **) = {
-	&hsh_env,
-	&hsh_help,
-	&hsh_cd
-};
+/* HelpFunction.h */
+void free_everything(char **args);
 
 
 #endif /* _SHELL_H */
