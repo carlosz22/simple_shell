@@ -42,12 +42,13 @@ int hsh_env(char **env)
 		printf("%s\n", env[index]);
 		index++;
 	}
+	printf("%s\n", getenv("PATH"));
 return (1);
 }
 
 int hsh_help(char **args)
 {
-	printf("This is the help");
+	printf("This is the help\n");
 	return (1);
 }
 
@@ -103,8 +104,6 @@ int main(int argc, char **argv, char **env)
 			index++;
 		}
 		free(token); //revisar;
-		if (index > 1)
-			printf("no such file or directory\n");
 		pid = fork();
 		if (pid == 0)
 		{
@@ -113,13 +112,14 @@ int main(int argc, char **argv, char **env)
 			if (strcmp(tokens[0], "env") == 0) 
 			{
 				return (*builtin_func[0])(env);
+
 			}
 			else if (strcmp(tokens[0], builtin_str[i]) == 0)
 			{
 				return (*builtin_func[i])(tokens);
 			}
 		}
-			if (execve(tokens[0],tokens, NULL) == -1)
+			if (execve(tokens[0],tokens, env) == -1)
 			{
 				perror("Failed execve ejecution\n");
 				return (-1);
