@@ -18,3 +18,19 @@ void free_everything(char **args)
         free(args);
 }
 
+/**
+ * sigint_handler - doesn't exit in case of Ctrl-C
+ * @sig: required for signal function to run properly
+ *
+ * Description: ignore sig, print newline, print the prompt
+ * Call to fflush discards the Ctrl-C
+ */
+void sigint_handler(int sig)
+{
+        (void)sig;
+        putchar('\n');
+        write(STDOUT_FILENO, "$ ", 3); 
+        fflush(stdout);
+}
+
+

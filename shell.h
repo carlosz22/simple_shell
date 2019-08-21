@@ -20,13 +20,18 @@ extern char **environ;
 char *hsh_readline(void);
 char **hsh_parseline(char *line);
 int hsh_execute(char **args, char **env);
+int hsh_launch(char **args);
+char **hsh_splitpath(char *value);
+int hsh_execvp(char *file, char *argv[]);
+void *hsh_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+
+/* built-in functions*/
 int hsh_env(char **env);
 int hsh_help(char **args);
 int hsh_cd(char **args);
 int hsh_num_builtins(void);
-char **hsh_splitpath(char *value);
-int hsh_execvp(char *file, char *argv[]);
-void *hsh_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+long int exit_handler(char **tokens);
+
 
 /* String handling */
 int hsh_strlen(char *s);
@@ -44,6 +49,6 @@ int hsh_unsetenv(const char *);
 
 /* HelpFunction.h */
 void free_everything(char **args);
-
+void sigint_handler(int sig);
 
 #endif /* _SHELL_H */

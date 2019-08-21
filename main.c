@@ -20,7 +20,7 @@ int main(__attribute__((unused)) int argc,__attribute__((unused))  char **argv)
 	char **ep;
 
 	ep = environ;
-
+	signal(SIGINT, sigint_handler);
 	while(1)
 	{
 		write(STDIN_FILENO, "$ ", 3);
