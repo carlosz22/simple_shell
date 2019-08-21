@@ -9,6 +9,5 @@ int hsh_env(char **env)
         printf("%s\n", env[index]);
         index++;
     }
-    printf("%s\n", getenv("PATH"));
     return (1);
 }

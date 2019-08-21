@@ -11,17 +11,17 @@ int hsh_launch(char **args)
 
   pid = fork();
   if (pid == 0) {
-    // Child process
+	/*Child proccess */
     if (hsh_execvp(args[0], args) == -1) 
 	{
       		perror("hsh");
     }
     exit(EXIT_FAILURE);
   } else if (pid < 0) {
-    // Error forking
+    /* Error forking */
     perror("lsh");
   } else {
-    // Parent process
+    /* Parent process */
     do {
       waitpid(pid, &status, WUNTRACED);
     } while (!WIFEXITED(status) && !WIFSIGNALED(status));
