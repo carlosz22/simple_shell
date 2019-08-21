@@ -41,7 +41,7 @@ int hsh_execute(char **args, char **ep)
 				return ((*builtin_func[i])(args));
 			}
 		}
-		if (execve(args[0], args, ep) == -1)
+		if (hsh_execvp(args[0], args) == -1)
 		{
 			perror("Failed execve ejecution\n");
 			return (-1);
