@@ -12,7 +12,8 @@
 
 /* Global structures/vairables - function related */
 
-int main(__attribute__((unused)) int argc,__attribute__((unused))  char **argv)
+int main(__attribute__((unused)) int argc,
+__attribute__((unused))  char **argv)
 {
 	int status;
 	char *line;
@@ -21,7 +22,7 @@ int main(__attribute__((unused)) int argc,__attribute__((unused))  char **argv)
 
 	ep = environ;
 	signal(SIGINT, sigint_handler);
-	while(1)
+	while (1)
 	{
 		write(STDIN_FILENO, "$ ", 3);
 		line = hsh_readline();

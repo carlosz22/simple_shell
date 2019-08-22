@@ -7,15 +7,15 @@
 
 void free_everything(char **args)
 {
-        int i;
+	int i;
 
-        if (!args)
-                return;
+	if (!args)
+		return;
 
-        for (i = 0; args[i]; i++)
-                free(args[i]);
+	for (i = 0; args[i]; i++)
+		free(args[i]);
 
-        free(args);
+	free(args);
 }
 
 /**
@@ -27,21 +27,30 @@ void free_everything(char **args)
  */
 void sigint_handler(int sig)
 {
-        (void)sig;
-        putchar('\n');
-        write(STDOUT_FILENO, "$ ", 3); 
-        fflush(stdout);
+	(void)sig;
+	putchar('\n');
+	write(STDOUT_FILENO, "$ ", 3);
+	fflush(stdout);
 }
 
+/**
+ * is_delimiter - Checks if a character is a delimiter
+ * @c: character to check
+ * @delim: delimiter to verify
+ *
+ * Description: ignore sig, print newline, print the prompt
+ * Call to fflush discards the Ctrl-C
+ * Return: 1 if character is delimiter
+ */
 int is_delimiter(char c, char *delim)
 {
-	while(*delim)
+	while (*delim)
 	{
-		if(*delim++ == c)
+		if (*delim++ == c)
 		{
-			return(1);
+			return (1);
 		}
 	}
-	return(0);
+	return (0);
 }
 
