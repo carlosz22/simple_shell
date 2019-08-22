@@ -20,10 +20,21 @@ char *hsh_readline(void)
     }
 
     characters_read = getline(&line, &size, stdin);
-    if (characters_read == -1)
+    if (characters_read < 0)
+    {
+ 		if (isatty(STDIN_FILENO) != 0 && isatty(STDOUT_FILENO) != 0)
+			putchar('\n');
+	free(line);
+	return(NULL);
+    }
+	if (strcmp(line, "\n") == 0)
+             return (line);
+
+	
+    /*if (characters_read == -1)
     {
 	free(line);
 	return (NULL);
-    }
+    }*/
     return (line);
 }

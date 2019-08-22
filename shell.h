@@ -11,7 +11,7 @@
 
 /* Constants */
 #define buffer_size 1024
-#define delim_var " \t\r\n\a"
+#define delim_var " \t\r\n"
 
 /* Global variables */
 extern char **environ;
@@ -24,6 +24,8 @@ int hsh_launch(char **args);
 char **hsh_splitpath(char *value);
 int hsh_execvp(char *file, char *argv[]);
 void *hsh_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char **_strtok(char *str, char delim);
+int countwords(char *str, char delim);
 
 /* built-in functions*/
 int hsh_env(char **env);
