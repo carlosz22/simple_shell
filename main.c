@@ -28,6 +28,8 @@ int main(__attribute__((unused)) int argc,__attribute__((unused))  char **argv)
 		if (line == NULL)
 			break;
 		tokens = hsh_parseline(line);
+		if (tokens == NULL)
+			continue;
 		status = hsh_execute(tokens, ep);
 		if (status != 1)
 			continue;
