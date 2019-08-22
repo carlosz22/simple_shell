@@ -24,7 +24,7 @@ int hsh_launch(char **args);
 char **hsh_splitpath(char *value);
 int hsh_execvp(char *file, char *argv[]);
 void *hsh_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-char **_strtok(char *str, char delim);
+char **hsh_strtok(char *str, char *delim);
 int countwords(char *str, char delim);
 
 /* built-in functions*/
@@ -44,7 +44,6 @@ char *hsh_strconcat(char *s1, char *s2);
 /* Not implemented yet */
 void hsh_exit(int);
 ssize_t hsh_getline(char **, size_t *, FILE *);
-char *hsh_strtok(char *, const char *);
 char *hsh_getenv(char *);
 int hsh_setenv(const char *, const char *, int);
 int hsh_unsetenv(const char *);
@@ -52,5 +51,5 @@ int hsh_unsetenv(const char *);
 /* HelpFunction.h */
 void free_everything(char **args);
 void sigint_handler(int sig);
-
+int is_delimiter(char c, char *delim);
 #endif /* _SHELL_H */

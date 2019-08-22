@@ -33,4 +33,15 @@ void sigint_handler(int sig)
         fflush(stdout);
 }
 
+int is_delimiter(char c, char *delim)
+{
+	while(*delim)
+	{
+		if(*delim++ == c)
+		{
+			return(1);
+		}
+	}
+	return(0);
+}
 
