@@ -35,7 +35,7 @@ int main(__attribute__((unused)) int argc,__attribute__((unused))  char **argv)
 			continue;
 		/*free(tokens);*/
 		free(line);
-		free(tokens);
+		free_everything(tokens);
 	}
 	printf("afuera\n");
 	return (0);
