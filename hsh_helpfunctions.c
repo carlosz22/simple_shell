@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * free_everything - frees arrays of strings
  * @args: array of strings to free

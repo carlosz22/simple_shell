@@ -25,15 +25,14 @@ int hsh_launch(char **args)
 	else if (pid < 0)
 	{
 		/*Error forking*/
-		perror("lsh");
+		perror("hsh");
 	}
 	else
 	{
 	/*Parent process*/
 	do {
 		waitpid(pid, &status, WUNTRACED);
-		while
-		(!WIFEXITED(status) && !WIFSIGNALED(status));
+	} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 
 return (1);
