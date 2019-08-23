@@ -65,7 +65,7 @@ int hsh_strcmp(char *s1, char *s2)
  */
 char *hsh_strconcat(char *s1, char *s2)
 {
-	int i = 0, j = 0, k = 0, l = 0, m = 0, n = 0;
+	int i = 0, j = 0, k = 0, n = 0;
 	char *a;
 	if (s1 == NULL)
 		s1 = "";
@@ -76,21 +76,18 @@ char *hsh_strconcat(char *s1, char *s2)
 
 	while (*(s2 + j))
 		j++;
-	j++;
 
-	a = malloc(sizeof(char) * (i + j + 2));
+	a = malloc(sizeof(char) * (i + j + 3));
 	if (a == NULL)
 		return (NULL);
 
-	for (k = 0; k <= i; k++)
+	for (k = 0; k < i; k++)
 	{
-		*(a + k) = *(s1 + l);
-		l++;
+		*(a + k) = *(s1 + k);
 	}
 	for (n = 0; n <= j; n++)
 	{
-		*(a + n + i) = *(s2 + m);
-		m++;
+		*(a + n + k) = *(s2 + n);
 	}
 	return (a);
 }
