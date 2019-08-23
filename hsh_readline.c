@@ -99,10 +99,5 @@ char *hsh_readline(void)
 	free(line);
 	return (NULL);
 }
-
-	if (strcmp(line, "\n") == 0)
-		return (line);
-
-
 	return (line);
 }
