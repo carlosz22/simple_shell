@@ -19,7 +19,7 @@ extern char **environ;
 /* Currently implemented */
 /* From Helper */
 int _getchar(void);
-int hsh_read(char **line, size_t n);
+int hsh_read(char **line, size_t *n);
 char *hsh_readline(void);
 char **hsh_parseline(char *line);
 int hsh_execute(char **args, char **env);
