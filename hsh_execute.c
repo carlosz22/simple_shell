@@ -22,10 +22,10 @@ static int (*builtin_func[]) (char **) = {
  *
  * Return: Pointer or NULL if error
  */
-int hsh_execute(char **args, char **ep)
+int hsh_execute(char **args, char **ep, char *line, int line_num)
 {
 	long int m = 0;
-	int i = 0;
+	int i = 0, response;
 
 	for (i = 0; i < hsh_num_builtins(); i++)
 	{
@@ -36,11 +36,18 @@ int hsh_execute(char **args, char **ep)
 		if (strcmp(args[0], "exit") == 0)
 		{
 			m = exit_handler(args);
-			if (m == -1)
-				perror("exit error");
+			if (m < 0)
+			{
+				dprintf(STDERR_FILENO,"hsh: 1: exit: Illegal number: %s\n", args[1]);
+				return(-1);
+			}
+			else if (m == -1)
+			{
+				perror("Exit error");
+			}
 			else
 			{
-				free(args);
+				free_everything(args);
 				exit(m);
 			}
 		}
@@ -50,6 +57,6 @@ int hsh_execute(char **args, char **ep)
 			return ((*builtin_func[i])(args));
 		}
 	}
-	return (hsh_launch(args));
+	response = hsh_execvp(args[0], args, line, line_num);
+	return (response);
 }
-

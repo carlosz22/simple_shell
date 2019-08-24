@@ -16,6 +16,7 @@ int main(__attribute__((unused)) int argc,
 __attribute__((unused))  char **argv)
 {
 	int status;
+	int line_num = 0;
 	char *line;
 	char **tokens;
 	char **ep;
@@ -31,13 +32,13 @@ __attribute__((unused))  char **argv)
 		tokens = hsh_parseline(line);
 		if (tokens == NULL)
 			continue;
-		status = hsh_execute(tokens, ep);
+		line_num++;
+		status = hsh_execute(tokens, ep, line, line_num);
 		if (status != 1)
 			continue;
 		/*free(tokens);*/
 		free(line);
 		free_everything(tokens);
 	}
-	printf("afuera\n");
 	return (0);
 }

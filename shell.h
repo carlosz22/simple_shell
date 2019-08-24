@@ -22,10 +22,10 @@ int _getchar(void);
 int hsh_read(char **line, size_t *n);
 char *hsh_readline(void);
 char **hsh_parseline(char *line);
-int hsh_execute(char **args, char **env);
-int hsh_launch(char **args);
+int hsh_execute(char **args, char **env, char *line, int line_num);
+/* int hsh_launch(char **args); */
 char **hsh_splitpath(char *value);
-int hsh_execvp(char *file, char *argv[]);
+int hsh_execvp(char *file, char *argv[], char *line, int line_num);
 void *hsh_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char **hsh_strtok(char *str, char *delim);
 int countwords(char *str, char delim);
