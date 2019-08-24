@@ -36,6 +36,7 @@ int hsh_execute(char **args, char **ep, char *line, int line_num)
 		if (strcmp(args[0], "exit") == 0)
 		{
 			m = exit_handler(args);
+			free(line), free_everything(args);
 			if (m < 0)
 			{
 				dprintf(STDERR_FILENO,"hsh: 1: exit: Illegal number: %s\n", args[1]);
@@ -47,7 +48,6 @@ int hsh_execute(char **args, char **ep, char *line, int line_num)
 			}
 			else
 			{
-				free_everything(args);
 				exit(m);
 			}
 		}

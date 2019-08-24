@@ -14,10 +14,8 @@ long int exit_handler(char **tokens)
 	long int num = 0;
 
 	if (tokens[1] == NULL)
-	{
-		free_everything(tokens);
-		exit(0);
-	}
+		return (0);
+
 	for (i = 0; tokens[1][i]; i++)
 	{
 		if ((tokens[1][i] >= '0' && tokens[1][i] <= '9') || tokens[1][0] == '+')
