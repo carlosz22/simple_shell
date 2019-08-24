@@ -7,14 +7,36 @@
  * Return: Always 1.
  */
 
-int hsh_cd(char **args)
+int hsh_cd(char **arguments)
 {
-    if (args[1] == NULL)
-        printf("Error: expected argument to \"cd\"\n");
-    else
-    {
-        if (chdir(args[1]) != 0)
-            perror("cd");
-    }
-    return (1);
+	char cwd[1024];
+	int cwd_size, index;
+
+	if (!arguments[1])
+	chdir(getenv("HOME"));
+
+	else if (strcmp(arguments[1], "-") == 0)
+	{
+		if (getenv("OLDPWD") == NULL)
+			chdir(".");
+
+		else
+		{
+			chdir(getenv("OLDPWD"));
+
+			getcwd(cwd, sizeof(cwd));
+
+			for (cwd_size = 0; cwd[index] != '\0'; index++)
+			cwd_size++;
+
+			cwd[index] = '\n';
+
+			write(1, cwd, cwd_size + 1);
+		}
+	}
+
+	else
+		chdir(arguments[1]);
+
+	return (1);
 }
