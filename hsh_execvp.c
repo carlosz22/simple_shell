@@ -5,7 +5,7 @@
  * Return: Pointer to the value of the environment variable or NULL if error.
  */
 
-int hsh_execvp(char *filename, char *argv[], char *line, __attribute__((unused)) int line_num)
+int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int line_num)
 {
 	char **env_cpy = environ;
 	char **splitted_path;
@@ -20,7 +20,7 @@ int hsh_execvp(char *filename, char *argv[], char *line, __attribute__((unused))
 	{
 		if (filename[0] == '\0')
 		{
-			free(line), free_everything(argv);
+			free_everything(argv);
 			return (-1);
 		}
 
@@ -28,7 +28,7 @@ int hsh_execvp(char *filename, char *argv[], char *line, __attribute__((unused))
 		{
 			if (execve(filename, argv, env_cpy) == -1)
 			{
-				free(line), free_everything(argv);
+				free_everything(argv);
 				return (-1);
 			}
 		}
@@ -43,13 +43,13 @@ int hsh_execvp(char *filename, char *argv[], char *line, __attribute__((unused))
 			if (access(concat_fname, F_OK | X_OK) == 0)
 				execve(concat_fname, argv, env_cpy);
 		}
-		free(slash_fname), free(concat_fname), free(line);
+		free(slash_fname), free(concat_fname);
 		free_everything(argv);
 		return (-1);
 	}
 	else if (pid < 0)
 	{
-		free(line), free_everything(argv);
+		free_everything(argv);
 		perror("Failed fork");
 		return (-1);
 	}

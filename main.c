@@ -33,7 +33,7 @@ __attribute__((unused))  char **argv)
 		if (tokens == NULL)
 			continue;
 		line_num++;
-		status = hsh_execute(tokens, ep, line, line_num);
+		status = hsh_execute(tokens, ep, line_num);
 		if (status != 1)
 			continue;
 		/*free(tokens);*/
