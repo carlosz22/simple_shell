@@ -24,13 +24,12 @@ int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int line_nu
 			exit(EXIT_FAILURE);
 		}
 
-		if (filename[0] == '/')
+		if (access(filename, F_OK | X_OK) == 0)
 		{
-			if (execve(filename, argv, env_cpy) == -1)
-			{
-				free_everything(argv);
-				exit(EXIT_FAILURE);
-			}
+			execve(filename, argv, env_cpy);
+			free_everything(argv);
+			perror("Command doesn't not exist");
+			exit(EXIT_FAILURE);
 		}
 
 		path = hsh_getenv("PATH");
@@ -46,6 +45,7 @@ int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int line_nu
 			}
 			free(slash_fname), free(concat_fname);
 		}
+
 		perror("Command doesn't exist");
 		free(splitted_path);
 		free_everything(argv);
