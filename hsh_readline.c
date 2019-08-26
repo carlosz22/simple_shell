@@ -98,6 +98,6 @@ char *hsh_readline(void)
 			putchar('\n');
 	free(line);
 	return (NULL);
-}
+	}
 	return (line);
 }

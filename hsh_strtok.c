@@ -16,6 +16,8 @@ char **hsh_strtok(char *str, char *delim)
 
 	if (str == NULL || str[0] == 0)
 		return (NULL);
+	if (str[0] == ':')
+		str = hsh_strconcat("./", str);
 	if (!delim)
 		delim = " ";
 	for (i = 0; str[i] != '\0'; i++)
