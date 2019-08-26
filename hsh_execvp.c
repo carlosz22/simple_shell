@@ -47,7 +47,7 @@ int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int line_nu
 			free(slash_fname), free(concat_fname);
 		}
 		perror("Command doesn't exist");
-		free(splitted_path);
+		free_everything(splitted_path);
 		free_everything(argv);
 		exit(EXIT_FAILURE);
 	}
