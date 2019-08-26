@@ -37,7 +37,6 @@ __attribute__((unused))  char **argv)
 		if (status != 1)
 			continue;
 		/*free(tokens);*/
-		free(line);
 		free_everything(tokens);
 	}
 	return (0);

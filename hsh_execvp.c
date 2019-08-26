@@ -21,7 +21,7 @@ int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int line_nu
 		if (filename[0] == '\0')
 		{
 			free_everything(argv);
-			return (-1);
+			exit(EXIT_FAILURE);
 		}
 
 		if (filename[0] == '/')
@@ -29,7 +29,7 @@ int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int line_nu
 			if (execve(filename, argv, env_cpy) == -1)
 			{
 				free_everything(argv);
-				return (-1);
+				exit(EXIT_FAILURE);
 			}
 		}
 
@@ -41,11 +41,16 @@ int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int line_nu
 			slash_fname = hsh_strconcat(splitted_path[i], "/");
 			concat_fname = hsh_strconcat(slash_fname, filename);
 			if (access(concat_fname, F_OK | X_OK) == 0)
-				execve(concat_fname, argv, env_cpy);
+			{
+				if (execve(concat_fname, argv, env_cpy) == -1)
+				{
+					perror("Command doesn't exist");
+				}
+			}
 		}
 		free(slash_fname), free(concat_fname);
 		free_everything(argv);
-		return (-1);
+		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)
 	{
