@@ -15,7 +15,7 @@ int hsh_cd(char **arguments)
 	if (!arguments[1])
 	chdir(getenv("HOME"));
 
-	else if (strcmp(arguments[1], "-") == 0)
+	else if (hsh_strcmp(arguments[1], "-") == 0)
 	{
 		if (getenv("OLDPWD") == NULL)
 			chdir(".");
