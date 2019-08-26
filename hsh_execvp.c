@@ -42,13 +42,12 @@ int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int line_nu
 			concat_fname = hsh_strconcat(slash_fname, filename);
 			if (access(concat_fname, F_OK | X_OK) == 0)
 			{
-				if (execve(concat_fname, argv, env_cpy) == -1)
-				{
-					perror("Command doesn't exist");
-				}
+				execve(concat_fname, argv, env_cpy);
 			}
+			free(slash_fname), free(concat_fname);
 		}
-		free(slash_fname), free(concat_fname);
+		perror("Command doesn't exist");
+		free(splitted_path);
 		free_everything(argv);
 		exit(EXIT_FAILURE);
 	}
