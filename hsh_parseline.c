@@ -12,7 +12,10 @@ char **hsh_parseline(char *line)
 	char *delim = delim_var;
 
 	if (line[0] == '\n' && hsh_strlen(line) == 1)
+	{
+		free(line);
 		return (NULL);
+	}
 	tokens =  hsh_strtok(line, delim);
 	free(line);
 	return (tokens);
