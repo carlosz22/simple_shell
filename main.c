@@ -20,8 +20,14 @@ __attribute__((unused))  char **argv)
 	char *line;
 	char **tokens;
 	char **ep;
+	char *file_name = argv[0];
 
 	ep = environ;
+	if (argc != 1)
+	{
+		print_error_main(argv);
+		exit(127);
+	}
 	signal(SIGINT, sigint_handler);
 	while (1)
 	{
@@ -33,9 +39,12 @@ __attribute__((unused))  char **argv)
 		if (tokens == NULL)
 			continue;
 		line_num++;
-		status = hsh_execute(tokens, ep, line_num);
+		status = hsh_execute(file_name, tokens, ep, &line_num);
 		if (status != 1)
+		{
+			free_everything(tokens);
 			continue;
+		}
 		/*free(tokens);*/
 		free_everything(tokens);
 	}

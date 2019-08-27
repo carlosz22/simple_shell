@@ -2,7 +2,7 @@
 
 /**
  * hsh_cd - Implementation of change directories (cd) built-in
- * @args: Arguments
+ * @arguments: Arguments
  *
  * Return: Always 1.
  */
@@ -13,13 +13,15 @@ int hsh_cd(char **arguments)
 	int cwd_size, index;
 
 	if (!arguments[1])
-	chdir(getenv("HOME"));
+		chdir(getenv("HOME"));
 
-	else if (strcmp(arguments[1], "-") == 0)
+	if (strcmp(arguments[1], "-") == 0)
 	{
 		if (getenv("OLDPWD") == NULL)
+		{
 			chdir(".");
-
+			return (1);
+		}
 		else
 		{
 			chdir(getenv("OLDPWD"));
@@ -32,11 +34,18 @@ int hsh_cd(char **arguments)
 			cwd[index] = '\n';
 
 			write(1, cwd, cwd_size + 1);
+			return(1);
 		}
 	}
 
-	else
+	if (chdir(arguments[1]) < 0)
+	{
+		return (-1);
+	}
+	else 
+	{
 		chdir(arguments[1]);
-
-	return (1);
+		return (1);
+	}	
+	return (0);
 }

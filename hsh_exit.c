@@ -30,7 +30,7 @@ long int exit_handler(char **tokens)
 	}
 	if (flag == 1)
 	{
-		num = atoi(tokens[1]);
+		num = hsh_atoi(tokens[1]);
 		return (num);
 	}
 	return (-1);

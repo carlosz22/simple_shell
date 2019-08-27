@@ -22,16 +22,16 @@ int _getchar(void);
 int hsh_read(char **line, size_t *n);
 char *hsh_readline(void);
 char **hsh_parseline(char *line);
-int hsh_execute(char **args, char **env, int line_num);
+int hsh_execute(char *file, char **args, char **env, int *line_num);
 /* int hsh_launch(char **args); */
 char **hsh_splitpath(char *value);
-int hsh_execvp(char *file, char *argv[], int line_num);
+int hsh_execvp(char *file, char *argv[], int *line_num);
 void *hsh_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char **hsh_strtok(char *str, char *delim);
 int countwords(char *str, char delim);
 
 /* built-in functions*/
-int hsh_env(char **env);
+int hsh_env(char **args, char **env);
 int hsh_help(char **args);
 int hsh_cd(char **args);
 int hsh_num_builtins(void);
@@ -55,4 +55,18 @@ int hsh_unsetenv(const char *);
 void free_everything(char **args);
 void sigint_handler(int sig);
 int is_delimiter(char c, char *delim);
+
+/* More functions*/
+int hsh_atoi(char *s);
+int _putchar(char c);
+void _puts(char *str);
+char *convert(int num, int base);
+
+/* Print Errors*/
+/* print_errors.c */
+void print_error(int *i, char *s, char **argv);
+void print_error_env(char **argv);
+void print_error_exit(int *i, char *s, char **argv);
+void print_error_main(char **av);
+void print_error_cd(int *i, char *s, char **argv);
 #endif /* _SHELL_H */
