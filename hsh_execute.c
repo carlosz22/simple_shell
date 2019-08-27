@@ -57,6 +57,6 @@ int hsh_execute(char **args, char **ep, int line_num)
 			return ((*builtin_func[i])(args));
 		}
 	}
-	response = hsh_execvp(args[0], args, line_num);
+	response = hsh_launch(args[0], args, line_num);
 	return (response);
 }

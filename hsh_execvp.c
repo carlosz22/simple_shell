@@ -7,59 +7,42 @@
 
 int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int line_num)
 {
-	char **env_cpy = environ;
-	char **splitted_path;
-	char *path;
-	char *slash_fname;
-	char *concat_fname;
-	int i = 0, status;
-	pid_t pid;
+	char **env_cpy = environ, **splitted_path;
+	char *path, *slash_fname, *concat_fname;
+	int i = 0;
 
-	pid = fork();
-	if (pid == 0)
+	if (filename[0] == '\0')
 	{
-		if (filename[0] == '\0')
-		{
-			free_everything(argv);
-			exit(EXIT_FAILURE);
-		}
-
-		if (access(filename, F_OK | X_OK) == 0)
-		{
-			execve(filename, argv, env_cpy);
-			free_everything(argv);
-			perror("Command doesn't not exist");
-			exit(EXIT_FAILURE);
-		}
-
-		path = hsh_getenv("PATH");
-		splitted_path = hsh_splitpath(path);
-
-		for (; splitted_path[i] != NULL; i++)
-		{
-			slash_fname = hsh_strconcat(splitted_path[i], "/");
-			concat_fname = hsh_strconcat(slash_fname, filename);
-			if (access(concat_fname, F_OK | X_OK) == 0)
-			{
-				execve(concat_fname, argv, env_cpy);
-			}
-			free(slash_fname), free(concat_fname);
-		}
-
-		perror("Command doesn't exist");
-		free_everything(splitted_path);
 		free_everything(argv);
 		exit(EXIT_FAILURE);
 	}
-	else if (pid < 0)
+
+	if (filename[0] == '/')
 	{
-		free_everything(argv);
-		perror("Failed fork");
-		return (-1);
+		if (execve(filename, argv, env_cpy) == -1)
+		{
+			free_everything(argv);
+			exit(EXIT_FAILURE);
+		}
+
 	}
-	else
+
+	path = hsh_getenv("PATH");
+	splitted_path = hsh_splitpath(path);
+
+	for (; splitted_path[i] != NULL; i++)
 	{
-		wait(&status);
+		slash_fname = hsh_strconcat(splitted_path[i], "/");
+		concat_fname = hsh_strconcat(slash_fname, filename);
+		if (access(concat_fname, F_OK | X_OK) == 0)
+		{
+			execve(concat_fname, argv, env_cpy);
+		}
+		free(slash_fname), free(concat_fname);
 	}
-	return (1);
+
+	perror("Command doesn't exist");
+	free_everything(splitted_path);
+	free_everything(argv);
+	return (-1);
 }
