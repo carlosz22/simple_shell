@@ -25,14 +25,14 @@ int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int *line_n
 		}
 
 		if (filename[0] == '/')
-		{
-			if (execve(filename, argv, env_cpy) == -1)
-			{
-				print_error(line_num, filename, argv);
-				free_everything(argv);
-				exit(EXIT_FAILURE);
-			}
-		}
+                {   
+                        if (execve(filename, argv, env_cpy) == -1) 
+                        {   
+                                print_error(line_num, filename, argv);
+                                free_everything(argv);
+                                exit(EXIT_FAILURE);
+                        }   
+                }   
 
 		path = hsh_getenv("PATH");
 		splitted_path = hsh_splitpath(path);
@@ -48,7 +48,9 @@ int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int *line_n
 			}
 			free(slash_fname), free(concat_fname);
 		}
+
 		print_error(line_num, filename, argv);
+
 		free_everything(splitted_path);
 		free_everything(argv);
 		exit(EXIT_FAILURE);

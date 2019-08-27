@@ -32,15 +32,18 @@ int hsh_execute(char *filename, char **args, char **ep, int *line_num)
 
 	for (i = 0; i < hsh_num_builtins(); i++)
 	{
-		if (strcmp(args[0], "env") == 0 || strcmp(args[0], "printenv") == 0 )
-		{
+
+		if (hsh_strcmp(args[0], "env") == 0 || hsh_strcmp(args[0], "printenv") == 0 )
+
+		if (hsh_strcmp(args[0], "env") == 0)
+  {
 			n = hsh_env(args, ep);
 			if (n == -1)
 				print_error_env(args);
 			return (n);
 			//return ((*builtin_func[0])(ep));
 		}
-		if (strcmp(args[0], "exit") == 0)
+		if (hsh_strcmp(args[0], "exit") == 0)
 		{
 			m = exit_handler(args);
 
@@ -56,7 +59,10 @@ int hsh_execute(char *filename, char **args, char **ep, int *line_num)
 			}
 		}
 
-		if (strcmp(args[0], "cd") == 0)
+
+		if (hsh_strcmp(args[0], "cd") == 0)
+
+	
 		{
 			l = hsh_cd(args);
 			if (l == -1)
