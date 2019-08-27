@@ -24,6 +24,7 @@ char *hsh_readline(void);
 char **hsh_parseline(char *line);
 int hsh_execute(char **args, char **env, int line_num);
 /* int hsh_launch(char **args); */
+int hsh_launch(char *file, char *argv[], int line_num);
 char **hsh_splitpath(char *value);
 int hsh_execvp(char *file, char *argv[], int line_num);
 void *hsh_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
