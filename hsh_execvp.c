@@ -1,11 +1,15 @@
 #include "shell.h"
 /**
  * hsh_execvp - Execute program handling the path
- * @char: Name of the variable to be searched
- * Return: Pointer to the value of the environment variable or NULL if error.
+ * @filename: Name of the file
+ * @argv: Arguments
+ * @line_num: Line number
+ *
+ * Return: -1 if the child does not enter to execve.
  */
 
-int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int line_num)
+int hsh_execvp(char *filename, char *argv[],
+__attribute__((unused)) int line_num)
 {
 	char **env_cpy = environ, **splitted_path;
 	char *path, *slash_fname, *concat_fname;
@@ -24,7 +28,6 @@ int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int line_nu
 			free_everything(argv);
 			exit(EXIT_FAILURE);
 		}
-
 	}
 
 	path = hsh_getenv("PATH");
@@ -40,7 +43,6 @@ int hsh_execvp(char *filename, char *argv[], __attribute__((unused)) int line_nu
 		}
 		free(slash_fname), free(concat_fname);
 	}
-
 	perror("Command doesn't exist");
 	free_everything(splitted_path);
 	free_everything(argv);
