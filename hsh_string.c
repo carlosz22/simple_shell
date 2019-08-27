@@ -8,6 +8,7 @@
 int hsh_strlen(char *s)
 {
 	int i = 0;
+
 	while (*(s + i) != '\0')
 	{
 		i++;
@@ -19,6 +20,7 @@ int hsh_strlen(char *s)
  * hsh_strncmp - Compare two strings with a specific length
  * @s1: String 1
  * @s2: String 2
+ * @len: Length required
  *
  * Return: Difference of characters (0 - Equal)
  */
@@ -67,6 +69,7 @@ char *hsh_strconcat(char *s1, char *s2)
 {
 	int i = 0, j = 0, k = 0, n = 0;
 	char *a;
+
 	if (s1 == NULL)
 		s1 = "";
 	if (s2 == NULL)
@@ -78,6 +81,7 @@ char *hsh_strconcat(char *s1, char *s2)
 		j++;
 
 	a = malloc(sizeof(char) * (i + j + 3));
+
 	if (a == NULL)
 		return (NULL);
 

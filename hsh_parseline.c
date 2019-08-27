@@ -16,7 +16,7 @@ char **hsh_parseline(char *line)
 		free(line);
 		return (NULL);
 	}
-	tokens =  hsh_strtok(line, delim);
+	tokens = hsh_strtok(line, delim);
 	free(line);
 	return (tokens);
 }
