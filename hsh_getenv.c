@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
  * hsh_getenv - get the value for an environment variable
- * @char: Name of the variable to be searched
+ * @name: Name of the variable to be searched
  * Return: Pointer to the value of the environment variable or NULL if error.
  */
 

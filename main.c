@@ -22,6 +22,11 @@ __attribute__((unused))  char **argv)
 	char **ep;
 
 	ep = environ;
+	if (argc != 1)
+	{
+		print_error_main(argv);
+		exit(127);
+	}
 	signal(SIGINT, sigint_handler);
 	while (1)
 	{
@@ -33,7 +38,7 @@ __attribute__((unused))  char **argv)
 		if (tokens == NULL)
 			continue;
 		line_num++;
-		status = hsh_execute(tokens, ep, line_num);
+		status = hsh_execute(tokens, ep, &line_num);
 		if (status != 1)
 			continue;
 		/*free(tokens);*/

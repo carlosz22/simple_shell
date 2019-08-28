@@ -50,7 +50,6 @@ char **hsh_strtok(char *str, char *delim)
 			s[j][m] = str[i++];
 		s[j][m] = 0;
 	}
-	s[j] = NULL;
-	return (s);
+	s[j] = NULL, return (s);
 }
 
