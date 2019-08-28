@@ -28,17 +28,17 @@ int hsh_execute(char **args, char **ep, int *line_num)
 		if ((m < 0) && (isatty(STDIN_FILENO) == 0))
 			print_error_exit(line_num, args[0], args), free_everything(args), exit(2);
 		else if (m < 0)
-			print_error_exit(line_num, args[0], args), free_everything(args),
-return (-1);
+		{
+			print_error_exit(line_num, args[0], args), free_everything(args);
+			return (-1);
+		}
 		else
 			free_everything(args), exit(m);
 	}
 	if (hsh_strcmp(args[0], "help") == 0)
-	{
-	hsh_help(args);
+	{hsh_help(args);
 		return (1);
 	}
-
 	if (hsh_strcmp(args[0], "cd") == 0)
 	{
 		l = hsh_cd(args);

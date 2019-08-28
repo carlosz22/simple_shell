@@ -42,9 +42,8 @@ int hsh_execvp(char *filename, char *argv[], int *line_num)
 		}
 		free(slash_fname), free(concat_fname);
 	}
-  print_error(line_num, filename, argv);
-
-  free_everything(splitted_path);
+	 print_error(line_num, filename, argv);
+	free_everything(splitted_path);
 	free_everything(argv);
 	return (-1);
 }
