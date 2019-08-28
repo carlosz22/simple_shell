@@ -30,6 +30,7 @@ int hsh_execvp(char *file, char *argv[], int *line_num);
 void *hsh_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char **hsh_strtok(char *str, char *delim);
 int countwords(char *str, char delim);
+int alloc_error(char *buffer);
 
 /* built-in functions*/
 int hsh_env(char **args, char **env);

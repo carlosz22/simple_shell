@@ -36,21 +36,19 @@ int _getchar(void)
 int hsh_read(char **line, size_t *n)
 {
 	int position = 0, flag = 0, c;
+
+	size_t new_size = buffer_size;
 	char *buffer = malloc(sizeof(char) * (*n));
 
-	if (!line)
-	{
-		perror("hsh: allocation error\n");
+	if (alloc_error(buffer) == -1)
 		return (-1);
-	}
 	*line = buffer;
 	while (1)
 	{
 		fflush(stdout);
 		c = _getchar();
 		if (c == EOF || c == '\n')
-		{
-			buffer[position] = '\0';
+		{ buffer[position] = '\0';
 			if (c == EOF)
 				return (-1);
 			else
@@ -59,17 +57,21 @@ int hsh_read(char **line, size_t *n)
 		else if (c == ' ')
 		{
 			if (flag == 0)
-			{
-				flag = 1;
+			{ flag = 1;
 				buffer[position] = c;
 				position++;
 			}
 		}
 		else
-		{
-			flag = 0;
+		{ flag = 0;
 			buffer[position] = c;
 			position++;
+		}
+		if (position >= buffer_size)
+		{ new_size += 1024;
+			buffer = hsh_realloc(buffer, buffer_size, new_size);
+			if (alloc_error(buffer) == -1)
+				return (-1);
 		}
 	}
 	return (-1);
@@ -98,4 +100,22 @@ char *hsh_readline(void)
 		return (NULL);
 	}
 	return (line);
+}
+
+/**
+ * alloc_error -  Allocation error
+ * storing the address of the buffer containing the text into *b.
+ *
+ * @buffer: buffer to check
+ * Return: -1 on eror.
+ */
+int alloc_error(char *buffer)
+{
+	if (!buffer)
+	{
+		perror("hsh: allocation error\n");
+		return (-1);
+	}
+	else
+		return (0);
 }
