@@ -26,10 +26,10 @@ int hsh_execute(char **args, char **ep, int *line_num)
 	{
 		m = exit_handler(args);
 		if ((m < 0) && (isatty(STDIN_FILENO) == 0))
-			print_error_exit(line_num, args[0], args), free_everything(args), exit(2);
+			print_error_exit(line_num, "./hsh", args), free_everything(args), exit(2);
 		else if (m < 0)
 		{
-			print_error_exit(line_num, args[0], args), free_everything(args);
+			print_error_exit(line_num, "./hsh", args), free_everything(args);
 			return (-1);
 		}
 		else
@@ -44,7 +44,7 @@ int hsh_execute(char **args, char **ep, int *line_num)
 		l = hsh_cd(args);
 		if (l == -1)
 		{
-			print_error_cd(line_num, args[0], args);
+			print_error_cd(line_num, "./hsh", args);
 			write(2, "\n", 1);
 			free_everything(args);
 		}

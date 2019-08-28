@@ -23,7 +23,7 @@ int hsh_execvp(char *filename, char *argv[], int *line_num)
 	{
 		if (execve(filename, argv, env_cpy) == -1)
 		{
-			print_error(line_num, filename, argv);
+			print_error(line_num, "./hsh", argv);
 			free_everything(argv);
 			exit(EXIT_FAILURE);
 		}
@@ -42,7 +42,7 @@ int hsh_execvp(char *filename, char *argv[], int *line_num)
 		}
 		free(slash_fname), free(concat_fname);
 	}
-	 print_error(line_num, filename, argv);
+	print_error(line_num, "./hsh", argv);
 	free_everything(splitted_path);
 	free_everything(argv);
 	return (-1);
