@@ -19,7 +19,7 @@ int hsh_execvp(char *filename, char *argv[], int *line_num)
 		exit(EXIT_FAILURE);
 	}
 
-	if (filename[0] == '/')
+	if (filename[0] == '/' || (filename[0] == '.' && filename[1] == '/'))
 	{
 		if (execve(filename, argv, env_cpy) == -1)
 		{
