@@ -16,8 +16,7 @@ char **hsh_strtok(char *str, char *delim)
 
 	if (str == NULL || str[0] == 0)
 		return (NULL);
-	if (str[0] == ':')
-		str = hsh_strconcat("./", str);
+	str = concat_tok(str, delim);
 	if (!delim)
 		delim = " ";
 	for (i = 0; str[i] != '\0'; i++)
@@ -51,4 +50,35 @@ char **hsh_strtok(char *str, char *delim)
 	s[j] = NULL;
 	return (s);
 }
+/**
+* concat_tok - converts a string into an array of tokens
+* @str: string to tokenize
+* @delim: delimeter between tokens
+*
+* Description: Set total to number of tokens in str
+*
+* Return: pointer to the array of strings on success, or NULL on failure
+*/
+char *concat_tok(char *str, char *delim)
+{
+	int i;
 
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		if ((str[0] == ':' || str[hsh_strlen(str) - 1] == ':') &&
+is_delimiter(':', delim))
+		{
+			str = hsh_strconcat(".\n", str);
+			break;
+		}
+		if ((str[i] == ':' && str[i +  1]) && is_delimiter(':', delim))
+		{
+			if (str[i + 1] == ':')
+			{
+				str = hsh_strconcat(".\n", str);
+				break;
+			}
+		}
+	}
+	return (str);
+}
