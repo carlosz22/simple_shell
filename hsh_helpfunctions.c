@@ -52,4 +52,3 @@ int is_delimiter(char c, char *delim)
 	}
 	return (0);
 }
-

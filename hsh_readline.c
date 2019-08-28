@@ -3,15 +3,13 @@
 /**
  * _getchar - puts char by char from read
  *
- * Description: ignore sig, print newline, print the prompt
- * Call to fflush discards the Ctrl-C
- * Return: buffer line
+ * Return: Integer of character read or EOF
  */
 
 int _getchar(void)
 {
 	int ret = 0;
-/*static char buff[buffer_size];*/
+	/*static char buff[buffer_size];*/
 	char buff[1];
 	char *chr;
 
@@ -33,7 +31,7 @@ int _getchar(void)
  *
  * Description: ignore sig, print newline, print the prompt
  * Call to fflush discards the Ctrl-C
- * Return: buffer line
+ * Return: characters read for the line
  */
 int hsh_read(char **line, size_t *n)
 {
@@ -56,7 +54,7 @@ int hsh_read(char **line, size_t *n)
 			if (c == EOF)
 				return (-1);
 			else
-				return (position +  1);
+				return (position + 1);
 		}
 		else if (c == ' ')
 		{
@@ -96,8 +94,8 @@ char *hsh_readline(void)
 	{
 		if (isatty(STDIN_FILENO) != 0 && isatty(STDOUT_FILENO) != 0)
 			putchar('\n');
-	free(line);
-	return (NULL);
+		free(line);
+		return (NULL);
 	}
 	return (line);
 }

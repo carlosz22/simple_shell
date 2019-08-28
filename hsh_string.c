@@ -81,6 +81,7 @@ char *hsh_strconcat(char *s1, char *s2)
 		j++;
 
 	a = malloc(sizeof(char) * (i + j + 3));
+
 	if (a == NULL)
 		return (NULL);
 
