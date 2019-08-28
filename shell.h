@@ -70,4 +70,5 @@ int hsh_atoi(char *s);
 int _putchar(char c);
 void _puts(char *str);
 char *convert(int num, int base);
+char *concat_tok(char *str, char *delim);
 #endif /* _SHELL_H */
