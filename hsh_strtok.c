@@ -21,11 +21,9 @@ char **hsh_strtok(char *str, char *delim)
 	if (!delim)
 		delim = " ";
 	for (i = 0; str[i] != '\0'; i++)
-	{
 		if (!is_delimiter(str[i], delim) && (is_delimiter(str[i + 1], delim) ||
 !str[i + 1]))
 			numwords++;
-	}
 	if (numwords == 0)
 		return (NULL);
 	s = malloc(sizeof(char *) * (numwords + 1));
@@ -50,6 +48,7 @@ char **hsh_strtok(char *str, char *delim)
 			s[j][m] = str[i++];
 		s[j][m] = 0;
 	}
-	s[j] = NULL, return (s);
+	s[j] = NULL;
+	return (s);
 }
 
