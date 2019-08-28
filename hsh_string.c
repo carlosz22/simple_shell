@@ -20,7 +20,7 @@ int hsh_strlen(char *s)
  * hsh_strncmp - Compare two strings with a specific length
  * @s1: String 1
  * @s2: String 2
- * @len: Length required
+ * @len: lenght
  *
  * Return: Difference of characters (0 - Equal)
  */

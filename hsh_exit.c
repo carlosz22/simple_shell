@@ -14,7 +14,7 @@ long int exit_handler(char **tokens)
 	long int num = 0;
 
 	if (tokens[1] == NULL)
-		return (0);
+		return (num);
 
 	for (i = 0; tokens[1][i]; i++)
 	{
@@ -30,7 +30,7 @@ long int exit_handler(char **tokens)
 	}
 	if (flag == 1)
 	{
-		num = atoi(tokens[1]);
+		num = hsh_atoi(tokens[1]);
 		return (num);
 	}
 	return (-1);

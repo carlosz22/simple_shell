@@ -2,7 +2,7 @@
 
 /**
  * hsh_cd - Implementation of change directories (cd) built-in
- * @args: Arguments
+ * @arguments: Arguments
  *
  * Return: Always 1.
  */
@@ -34,9 +34,9 @@ int hsh_cd(char **arguments)
 			write(1, cwd, cwd_size + 1);
 		}
 	}
-
-	else
+	if (chdir(arguments[1]) >= 0)
 		chdir(arguments[1]);
-
+	else
+		return (-1);
 	return (1);
 }
