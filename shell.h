@@ -71,4 +71,14 @@ int _putchar(char c);
 void _puts(char *str);
 char *convert(int num, int base);
 char *concat_tok(char *str, char *delim);
+/* More Help*/
+void test_help_exit(void);
+void test_help_general(void);
+void test_help_unsetenv(void);
+void test_help_setenv(void);
+void test_help_env(void);
+/* More Help2*/
+void test_help(void);
+void test_help_alias(void);
+void test_help_cd(void);
 #endif /* _SHELL_H */
