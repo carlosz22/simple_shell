@@ -1,42 +1,49 @@
 #include "shell.h"
 
 /**
- * hsh_cd - Implementation of change directories (cd) built-in
- * @arguments: Arguments
+ * cd - chnge directory
  *
- * Return: Always 1.
+ * @arguments: arguments
+ *
+ * Return: 1
  */
 
 int hsh_cd(char **arguments)
 {
+
 	char cwd[1024];
-	int cwd_size, index;
+	int index;
+	int cwd_size = 0;
 
-	if (!arguments[1])
-	chdir(getenv("HOME"));
+	if (!arguments[1] || (arguments[1][0] == '~' && !arguments[1][1]))
+		chdir(hsh_getenv("HOME"));
 
-	else if (hsh_strcmp(arguments[1], "-") == 0)
+	else if (arguments[1][0] == '-' && !arguments[1][1])
 	{
-		if (getenv("OLDPWD") == NULL)
-			chdir(".");
-
-		else
-		{
-			chdir(getenv("OLDPWD"));
-
-			getcwd(cwd, sizeof(cwd));
-
-			for (cwd_size = 0; cwd[index] != '\0'; index++)
+		chdir(hsh_getenv("OLDPWD"));
+		getcwd(cwd, sizeof(cwd));
+		for (index = 0; cwd[index] != '\0'; index++)
 			cwd_size++;
 
-			cwd[index] = '\n';
-
-			write(1, cwd, cwd_size + 1);
-		}
+		cwd[index] = '\n';
+		write(1, cwd, cwd_size + 1);
 	}
-	if (chdir(arguments[1]) >= 0)
-		chdir(arguments[1]);
+
+	else if (access(arguments[1], F_OK) == 0)
+	{
+		if (access(arguments[1], R_OK) != 0)
+			return (-1);
+
+		else
+			chdir(arguments[1]);
+	}
+
 	else
 		return (-1);
+
+
 	return (1);
 }
+
+
+
