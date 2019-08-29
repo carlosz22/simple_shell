@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * cd - chnge directory
+ * hsh_cd - chnge directory
  *
  * @arguments: arguments
  *
