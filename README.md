@@ -1,4 +1,4 @@
-# 0x16. C - SiBmple Shell
+# 0x16. C - Simple Shell
 ![logo](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-low_level_programming/235/shell.jpeg)
 ## Description
 ----
