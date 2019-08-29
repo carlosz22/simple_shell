@@ -1,5 +1,5 @@
-# 0x16. C - Simple Shell
-![logo](./shell.jpeg)
+# 0x16. C - SiBmple Shell
+![logo](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-low_level_programming/235/shell.jpeg)
 ## Description
 ----
 This team project is part of the first year curriculum of Holberton School.
@@ -59,7 +59,7 @@ $ /bin/ls
 foo main.c coquille.c README.md tests croissant.c
 ```
 ```bash
-$ pwd 
+$ pwd
 /home/vagrant/simple_shell
 ```
 ```bash
